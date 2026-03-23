@@ -12,23 +12,26 @@ export const initializeTodoModal = () => {
 
     const inputTitle = document.createElement('input');
     inputTitle.type = 'text';
+    inputTitle.name = 'title';
     inputTitle.id = 'todo-title';
     inputTitle.placeholder = 'Titel';
     inputTitle.required = true;
 
     const textAreaDesc = document.createElement('textarea');
     textAreaDesc.id = 'todo-desc';
+    textAreaDesc.name = 'description';
     textAreaDesc.placeholder = 'Beschreibung';
 
     const inputDate = document.createElement('input');
     inputDate.type = 'date';
+    inputDate.name = 'date';
     inputDate.id = 'todo-date';
 
     const buttonContainer = document. createElement('button');
     buttonContainer.classList.add('modal-buttons');
 
 
-    const cancelBtn = document.createElement('buttonn');
+    const cancelBtn = document.createElement('button');
     cancelBtn.type = 'button';
     cancelBtn.textContent = 'Abbrechen';
 
@@ -37,7 +40,8 @@ export const initializeTodoModal = () => {
     saveBtn.id = 'save-btn';
     saveBtn.textContent = 'Speichern';
 
-    buttonContainer.appendChild(cancelBtn, saveBtn);
+    buttonContainer.appendChild(cancelBtn);
+    buttonContainer.appendChild(saveBtn);
 
     form.append(h2, inputTitle, textAreaDesc, inputDate, buttonContainer);
 
@@ -51,6 +55,10 @@ export const initializeTodoModal = () => {
 
     return dialog;
 
+};
 
+export const getTodoFormData = (formElement) => {
+    const formData = new FormData(formElement);
 
-}
+    return Object.fromEntries(formData.entries());
+};

@@ -1,26 +1,34 @@
-// Test import of a JavaScript module
-import { example } from '@/js/example'
+import { loadHome } from './js/ui/home'
 
-// Test import of an asset
-import webpackLogo from '@/images/webpack-logo.svg'
 
 // Test import of styles
 import '@/styles/index.scss'
+import { createNavbar } from './js/ui/navbar';
+import { initializeTodoModal } from './js/ui/todoModalUI';
+import { loadTodoModal } from './js/ui/loadTodoModal';
 
-// Appending to the DOM
-const logo = document.createElement('img')
-logo.src = webpackLogo
 
-const heading = document.createElement('h1')
-heading.textContent = example()
 
-// Test a background image url in CSS
-const imageBackground = document.createElement('div')
-imageBackground.classList.add('image')
+const root = document.querySelector('#root'); 
+const navbar = createNavbar(
+    () => renderPage(loadHome), 
+    () => renderPage(loadProjects)
+);
+root.append(navbar);
 
-// Test a public folder asset
-const imagePublic = document.createElement('img')
-imagePublic.src = '/assets/example.png'
+const todoDialog = initializeTodoModal();
+const addBtnContainer = loadTodoModal(todoDialog);
+root.append(addBtnContainer);
 
-const app = document.querySelector('#root')
-app.append(logo, heading, imageBackground, imagePublic)
+const pageContent = document.createElement('div');
+pageContent.id = 'page-content'; 
+root.append(pageContent);
+
+function renderPage(pageFunction) {
+    pageContent.innerHTML = ''; 
+    pageContent.append(pageFunction());
+}
+
+
+renderPage(loadHome);
+

@@ -5,8 +5,9 @@ export const createTodo = ({
   priority = 'low',
   notes = '',
   checkList = [],
+  id = crypto.randomUUID(),
 } = {}) => {
-  let data = { title, description, dueDate, priority, notes, checkList }
+  let data = { title, description, dueDate, priority, notes, checkList, id }
 
   const validators = {
     title: (val) => typeof val === 'string' && val.length > 0,
@@ -21,6 +22,7 @@ export const createTodo = ({
     priority: (val) => ['low', 'medium', 'high'].includes(val),
 
     notes: (val) => typeof val === 'string',
+    id: (val) => typeof val === 'string',
   }
 
   return {

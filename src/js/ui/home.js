@@ -1,3 +1,5 @@
+import { createTodoLine } from "./createTodoLine";
+
 export const loadHome = (todoList = []) => {
 const content = document.querySelector('#content');
 content.textContent = '';
@@ -21,8 +23,8 @@ content.appendChild(title);
     listContainer.classList.add('todo-list');
 
     todoList.forEach(todo => {
-        const card = createTodoCard(todo);
-        listContainer.appendChild(card);
+        const line = createTodoLine(todo);
+        listContainer.appendChild(line);
     });
 
     content.appendChild(listContainer);

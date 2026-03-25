@@ -19,8 +19,23 @@ export const createTodoLine = (todo) => {
     title.classList.add('todo-title');
     title.textContent = todo.get('title');
 
+    const desc = document.createElement('div');
+    desc.classList.add('todo-desc');
+    desc.textContent = todo.get('description');
+
+    const priorityText = document.createElement('div');
+    priorityText.classList.add('todo-priority');
+    priorityText.textContent = todo.get('priority');
+
+    const notes = document.createElement('div');
+    notes.classList.add('todo-notes');
+    notes.textContent = todo.get('notes');
+
     leftGroup.appendChild(checkbox);
     leftGroup.appendChild(title);
+    leftGroup.appendChild(priorityText);
+    leftGroup.appendChild(desc);
+    leftGroup.appendChild(notes);
 
     const rightGroup = document.createElement('div');
     rightGroup.style.display = 'flex';

@@ -13,8 +13,6 @@ export const createTodo = ({
     title: (val) => typeof val === 'string' && val.length > 0,
 
     dueDate: (val) => {
-      // Prüft, ob es ein gültiges Date-Objekt ist
-      // ODER ein String, der als Datum erkannt werden kann
       const timestamp = Date.parse(val)
       return !isNaN(timestamp)
     },
@@ -31,7 +29,6 @@ export const createTodo = ({
     },
 
     set(key, value) {
-      // 1. Prüfen, ob wir für diesen Key überhaupt eine Regel haben
       if (validators[key]) {
         const isValid = validators[key](value)
         if (!isValid) {
@@ -40,7 +37,6 @@ export const createTodo = ({
         }
       }
 
-      // 2. Wir erstellen eine Variable für den Wert, den wir wirklich speichern wollen
       let valueToStore = value
 
       if (key === 'dueDate') {
@@ -48,7 +44,6 @@ export const createTodo = ({
         valueToStore = dateObj
       }
 
-      // 3. SPEICHERN
       if (key in data) {
         data[key] = valueToStore 
         return true
